@@ -16,7 +16,7 @@ default: &default
   username: root
   password:
   host: localhost
-#  socket: /var/lib/mysql/mysql.sock
+  socket: /var/lib/mysql/mysql.sock
 
 development:
   <<: *default
@@ -52,4 +52,4 @@ production:
   <<: *default
   database: ec_test_production
   username: ec_test
-#  password: <%= ENV['ryutenki'] %>
+  password: <%= ENV['ryutenki'] %>
