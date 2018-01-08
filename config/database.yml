@@ -51,4 +51,4 @@ production:
   <<: *default
   database: ec_test_production
   username: ec_test
-  password: <%= ENV['EC_TEST_DATABASE_PASSWORD'] %>
+  password: ryutenki
