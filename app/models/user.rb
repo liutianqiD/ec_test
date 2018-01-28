@@ -6,10 +6,17 @@ class User < ApplicationRecord
          :confirmable, :lockable, :timeoutable, :omniauthable, omniauth_providers: [:twitter]
 
   def self.from_omniauth(auth)
-    find_or_create_by(provider: auth["provider"], userid: auth["uid"]) do |user|
-      user.provider = auth["provider"]
-      user.userid = auth["uid"]
-      user.username = auth["info"]["nickname"]
+    where(provider: auth.provider, userid: auth.uid).first_or_create do |user|
+      user.provider = auth.provider
+      user.userid = auth.uid
+      user.username = auth.info.nickname
+      # user.email = auth.uid+"@twitter.com"
+      # user.password = Devise.friendly_token[0,20]
+
+      #user.image = auth.info.image # assuming the user model has an image
+      # If you are using confirmable and the provider(s) you use validate emails,
+      # uncomment the line below to skip the confirmation emails.
+      # user.skip_confirmation!
     end
   end
 
